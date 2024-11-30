@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Presentacion/Login.java</file>
+            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Presentacion/MedicoEditForm.java</file>
+            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Presentacion/PacienteForm.java</file>
+            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Tool/TBPaciente.java</file>
+            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Presentacion/Page.java</file>
+            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Presentacion/MedicoForm.java</file>
+            <file>file:/C:/Users/josue/Documents/NetBeansProjects/SistemaClinica/src/Presentacion/PacienteEditForm.java</file>
         </group>
     </open-files>
 </project-private>
