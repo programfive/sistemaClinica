@@ -58,4 +58,9 @@ public class DMedico {
         String sql = "SELECT * FROM medico";
         return conn.showDate(sql);
     }
+
+public ResultSet obtenerMedicoPorId(String id) throws Exception {
+    String sql = "SELECT * FROM medico WHERE id = '" + id + "'";
+    return conn.showDate(sql);
+}
 }

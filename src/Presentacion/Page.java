@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package Presentacion;
+import Negocio.NCita;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import Negocio.NMedico;
 import Negocio.NPaciente;
+import Tool.TBCita;
 import Tool.TBMedico;
 import Tool.TBPaciente;
 import java.util.List;
@@ -24,14 +26,20 @@ public class Page extends javax.swing.JFrame {
      */
     TBMedico tablaMedico;
      TBPaciente tablaPaciente;
+     TBCita tablaCita;
 
 
     public Page() {
         initComponents();
         tablaMedico = new  TBMedico();
         tablaPaciente = new TBPaciente();
+        tablaCita = new TBCita();
+        tablaMedico.cargarMedicos(tbMedi);
         tablaPaciente.cargarPacientes(tbPac);
-        tablaMedico.cargarMedicos(jTable1);
+        tablaCita.cargarCitas(tbCitas);
+            
+
+  
         }
 
     /**
@@ -68,10 +76,10 @@ public class Page extends javax.swing.JFrame {
         tbMed = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbMedi = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        btnEditMedico = new javax.swing.JButton();
         jP2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -80,14 +88,16 @@ public class Page extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jP1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         jP4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbCitas = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jP3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
 
         jp3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -365,13 +375,14 @@ public class Page extends javax.swing.JFrame {
                 .addContainerGap(175, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 51, 102));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        tbMed.setBackground(new java.awt.Color(255, 204, 0));
+        tbMed.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setText("medicos");
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jLabel6.setText("Medicos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbMedi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -382,19 +393,12 @@ public class Page extends javax.swing.JFrame {
                 "id", "Nombre", "apellido", "direccion", "telefono"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tbMedi);
 
         jButton6.setText("eliminar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("editar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
             }
         });
 
@@ -405,45 +409,49 @@ public class Page extends javax.swing.JFrame {
             }
         });
 
+        btnEditMedico.setText("editar");
+        btnEditMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditMedicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tbMedLayout = new javax.swing.GroupLayout(tbMed);
         tbMed.setLayout(tbMedLayout);
         tbMedLayout.setHorizontalGroup(
             tbMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tbMedLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addGroup(tbMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(tbMedLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton6)
-                        .addGap(63, 63, 63)
-                        .addComponent(jButton7)
-                        .addGap(48, 48, 48)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnEditMedico)
+                        .addGap(27, 27, 27)
                         .addComponent(jButton8))
                     .addGroup(tbMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tbMedLayout.createSequentialGroup()
-                            .addGap(101, 101, 101)
-                            .addComponent(jLabel6))
-                        .addGroup(tbMedLayout.createSequentialGroup()
-                            .addGap(41, 41, 41)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel6)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         tbMedLayout.setVerticalGroup(
             tbMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tbMedLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel6)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tbMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(jButton8)
+                    .addComponent(btnEditMedico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jP2.setBackground(new java.awt.Color(51, 204, 0));
+        jP2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel7.setText("Pacientes");
 
         tbPac.setModel(new javax.swing.table.DefaultTableModel(
@@ -507,7 +515,7 @@ public class Page extends javax.swing.JFrame {
             .addGroup(jP2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
@@ -517,44 +525,63 @@ public class Page extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
         );
 
-        jP1.setBackground(new java.awt.Color(204, 255, 102));
+        jP1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setText("continuamos");
 
         javax.swing.GroupLayout jP1Layout = new javax.swing.GroupLayout(jP1);
         jP1.setLayout(jP1Layout);
         jP1Layout.setHorizontalGroup(
             jP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 912, Short.MAX_VALUE)
+            .addGroup(jP1Layout.createSequentialGroup()
+                .addGap(382, 382, 382)
+                .addComponent(jLabel10)
+                .addContainerGap(458, Short.MAX_VALUE))
         );
         jP1Layout.setVerticalGroup(
             jP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(jP1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabel10)
+                .addContainerGap(518, Short.MAX_VALUE))
         );
 
-        jP4.setBackground(new java.awt.Color(204, 255, 102));
+        jP4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setText("citas");
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jLabel8.setText("Citas");
 
         tbCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "id", "fecha y hora", "paciente", "medico"
+                "id", "fecha y hora", "estado", "paciente", "medico"
             }
         ));
         jScrollPane5.setViewportView(tbCitas);
 
-        jButton9.setText("editar");
-
         jButton10.setText("eliminar");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("crear");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("estado");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -567,19 +594,19 @@ public class Page extends javax.swing.JFrame {
                 .addGroup(jP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton7)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton9)
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
                         .addComponent(jButton11)
                         .addGap(99, 99, 99))
                     .addGroup(jP4Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP4Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+            .addGroup(jP4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
         jP4Layout.setVerticalGroup(
             jP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,24 +616,32 @@ public class Page extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10)
-                    .addComponent(jButton9)
-                    .addComponent(jButton11))
-                .addGap(18, 18, 18)
+                    .addComponent(jButton11)
+                    .addComponent(jButton7))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jP3.setBackground(new java.awt.Color(153, 255, 51));
+
+        jLabel11.setText("😎😎😎😎😎😎😎😎😎😎😎😎");
 
         javax.swing.GroupLayout jP3Layout = new javax.swing.GroupLayout(jP3);
         jP3.setLayout(jP3Layout);
         jP3Layout.setHorizontalGroup(
             jP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 910, Short.MAX_VALUE)
+            .addGroup(jP3Layout.createSequentialGroup()
+                .addGap(338, 338, 338)
+                .addComponent(jLabel11)
+                .addContainerGap(464, Short.MAX_VALUE))
         );
         jP3Layout.setVerticalGroup(
             jP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+            .addGroup(jP3Layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(jLabel11)
+                .addContainerGap(528, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -781,52 +816,30 @@ public class Page extends javax.swing.JFrame {
           String carnet = tbPac.getValueAt(selectedRow, 3).toString();
 
  
-          PacienteEditForm  pacienteEditForm = new PacienteEditForm(id,nombre, apellido, carnet,tbMedico);
+          PacienteEditForm  pacienteEditForm = new PacienteEditForm(id,nombre, apellido, carnet,tbMedi);
           pacienteEditForm.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // crear medico
-        MedicoForm medicoForm = new MedicoForm(jTable1);
+        MedicoForm medicoForm = new MedicoForm(tbMedi);
         medicoForm.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-    // editar medico
-          int selectedRow = jTable1.getSelectedRow();
-
-       
-          if (selectedRow == -1) {
-              JOptionPane.showMessageDialog(this, "Por favor, seleccione un médico para editar", "Error", JOptionPane.ERROR_MESSAGE);
-              return;
-          }
-
-
-          String id = jTable1.getValueAt(selectedRow, 0).toString();
-          String nombre = jTable1.getValueAt(selectedRow, 1).toString();
-          String apellido = jTable1.getValueAt(selectedRow, 2).toString();
-          String direccion = jTable1.getValueAt(selectedRow, 3).toString();
-          String telefono = jTable1.getValueAt(selectedRow, 4).toString();
- 
-          MedicoEditForm medicoEditForm = new MedicoEditForm(id,nombre, apellido, direccion, telefono,jTable1);
-          medicoEditForm.setVisible(true);
-          
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     //eliminar 
         try {
-            int selectedRow = jTable1.getSelectedRow();
+            int selectedRow = tbMedi.getSelectedRow();
             
             
             if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(this, "Por favor, seleccione un médico para editar", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            String id = jTable1.getValueAt(selectedRow, 0).toString();
+            String id = tbMedi.getValueAt(selectedRow, 0).toString();
             NMedico nmedico = new NMedico() ;
             nmedico.NEliminarMedico(id);
-            tablaMedico.cargarMedicos(jTable1);
+            tablaMedico.cargarMedicos(tbMedi);
         } catch (Exception ex) {
             Logger.getLogger(Page.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -838,6 +851,69 @@ public class Page extends javax.swing.JFrame {
         cita.setVisible(true);
         
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // eliminar cita
+        
+        try {
+            int selectedRow = tbCitas.getSelectedRow();
+            
+            
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un médico para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String id = tbCitas.getValueAt(selectedRow, 0).toString();
+            NCita ncita = new NCita() ;
+            ncita.NEliminarCita(id);
+            tablaCita.cargarCitas(tbCitas);
+
+        } catch (Exception ex) {
+            Logger.getLogger(Page.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        //cambiar estado
+            try {
+            int selectedRow = tbCitas.getSelectedRow();
+            
+            
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un médico para editar", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String id = tbCitas.getValueAt(selectedRow, 0).toString();
+            CitasEstado citasEstado = new CitasEstado(id,tbCitas);
+            citasEstado.setVisible(true);
+            
+      
+        } catch (Exception ex) {
+            Logger.getLogger(Page.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnEditMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditMedicoActionPerformed
+      //editar medico
+           int selectedRow = tbMedi.getSelectedRow();
+
+       
+          if (selectedRow == -1) {
+              JOptionPane.showMessageDialog(this, "Por favor, seleccione un médico para editar", "Error", JOptionPane.ERROR_MESSAGE);
+              return;
+          }
+
+
+          String id = tbMedi.getValueAt(selectedRow, 0).toString();
+          String nombre = tbMedi.getValueAt(selectedRow, 1).toString();
+          String apellido = tbMedi.getValueAt(selectedRow, 2).toString();
+          String direccion = tbMedi.getValueAt(selectedRow, 3).toString();
+            String telefono = tbMedi.getValueAt(selectedRow, 3).toString();
+            MedicoEditForm medicoEditForm = new MedicoEditForm(id,nombre,apellido,direccion,telefono,tbMedi);
+            medicoEditForm.setVisible(true);
+     
+    }//GEN-LAST:event_btnEditMedicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -881,6 +957,7 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JPanel btn4;
     private javax.swing.JPanel btn5;
     private javax.swing.JButton btnCrearMedico;
+    private javax.swing.JButton btnEditMedico;
     private javax.swing.JLabel favicon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -892,8 +969,9 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -913,10 +991,10 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jp3;
     public javax.swing.JTable tbCitas;
     private javax.swing.JPanel tbMed;
+    private javax.swing.JTable tbMedi;
     public javax.swing.JTable tbMedico;
     private javax.swing.JTable tbPac;
     public javax.swing.JTable tbPacientes;

@@ -5,6 +5,11 @@
  */
 package Presentacion;
 
+import Negocio.NCita;
+import Negocio.NMedico;
+import Negocio.NPaciente;
+import java.util.List;
+
 /**
  *
  * @author josue
@@ -14,8 +19,41 @@ public class CitaForm extends javax.swing.JFrame {
     /**
      * Creates new form CitaForm
      */
+    private NCita ncita;
+    private NPaciente npaciente;
+    private NMedico nmedico;
+
     public CitaForm() {
         initComponents();
+        ncita = new NCita();
+        npaciente = new NPaciente();
+        nmedico = new NMedico();
+        cargarPacientes();
+        cargarMedicos();
+    }
+
+    private void cargarPacientes() {
+        try {
+            List<Object[]> pacientes = npaciente.mostrarPacientes();
+            paciente.removeAllItems();
+            for (Object[] paciente : pacientes) {
+                this.paciente.addItem(paciente[1] + " " + paciente[2]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cargarMedicos() {
+        try {
+            List<Object[]> medicos = nmedico.mostrarMedico();
+            medico.removeAllItems();
+            for (Object[] medico : medicos) {
+                this.medico.addItem(medico[1] + " " + medico[2]); 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -32,9 +70,10 @@ public class CitaForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        paciente = new javax.swing.JComboBox<>();
+        medico = new javax.swing.JComboBox<>();
+        fecha = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,9 +85,16 @@ public class CitaForm extends javax.swing.JFrame {
 
         jLabel4.setText("paciente");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        paciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        medico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,11 +113,14 @@ public class CitaForm extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(369, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                            .addComponent(paciente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(medico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jButton1)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,20 +130,76 @@ public class CitaForm extends javax.swing.JFrame {
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(medico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(paciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(234, Short.MAX_VALUE))
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(jButton1)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+        if (fecha.getDate() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Por favor, seleccione una fecha para la cita.", 
+                "Campos Requeridos", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int pacienteIndex = paciente.getSelectedIndex();
+        if (pacienteIndex < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Por favor, seleccione un paciente.", 
+                "Campos Requeridos", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int medicoIndex = medico.getSelectedIndex();
+        if (medicoIndex < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Por favor, seleccione un médico.", 
+                "Campos Requeridos", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        List<Object[]> pacientes = npaciente.mostrarPacientes();
+        List<Object[]> medicos = nmedico.mostrarMedico();
+        
+        int pacienteId = (int) pacientes.get(pacienteIndex)[0];
+        int medicoId = (int) medicos.get(medicoIndex)[0];
+        java.util.Date selectedDate = fecha.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+        
+        ncita.NInsertarCita(0, sqlDate.toString(), "Pendiente", pacienteId, medicoId);
+        
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Cita creada exitosamente", 
+            "Éxito", 
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+        this.dispose();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error al crear la cita: " + e.getMessage(), 
+            "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,13 +237,14 @@ public class CitaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser fecha;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    public javax.swing.JComboBox<String> medico;
+    public javax.swing.JComboBox<String> paciente;
     // End of variables declaration//GEN-END:variables
 }

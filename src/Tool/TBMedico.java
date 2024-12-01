@@ -36,11 +36,5 @@ public class TBMedico {
         }
     }
 
-    public void cargarMedicos(TBMedico tablaMedico) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public void cargarMedicos(JPanel tbMed) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

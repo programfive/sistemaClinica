@@ -156,7 +156,7 @@ public class PacienteEditForm extends javax.swing.JFrame {
     try {
       npaciente.NModificarPaciente(idText,nomb,apell,carn);
         javax.swing.JOptionPane.showMessageDialog(this, 
-                "El médico se ha modificado correctamente.", 
+                "El paciente se ha modificado correctamente.", 
                 "Éxito", 
                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
         JTable tbMedic = null;
@@ -167,7 +167,7 @@ public class PacienteEditForm extends javax.swing.JFrame {
 
         Logger.getLogger(MedicoForm.class.getName()).log(Level.SEVERE, null, ex);
         javax.swing.JOptionPane.showMessageDialog(this, 
-                "Ocurrió un error al registrar el médico. Inténtelo de nuevo.", 
+                "Ocurrió un error al registrar el paciente. Inténtelo de nuevo.", 
                 "Error", 
                 javax.swing.JOptionPane.ERROR_MESSAGE);
     }

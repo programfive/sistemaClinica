@@ -25,8 +25,7 @@ public class MedicoForm extends javax.swing.JFrame {
     public MedicoForm(javax.swing.JTable  tbMedic) {
         initComponents();
         medico = new NMedico();
-          tablaMedico = new TBMedico();
-        tbMedico=tbMedic;
+        tablaMedico = new TBMedico();
     
     }
 
@@ -158,7 +157,7 @@ public class MedicoForm extends javax.swing.JFrame {
                 "El médico se ha registrado correctamente.", 
                 "Éxito", 
                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            tablaMedico.cargarMedicos(tbMedico);
+      
         this.dispose();
     } catch (Exception ex) {
 

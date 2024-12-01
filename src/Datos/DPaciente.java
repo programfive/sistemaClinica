@@ -62,4 +62,9 @@ public class DPaciente {
         String sql = "SELECT * FROM paciente";
         return conn.showDate(sql);
     }
+
+    public ResultSet obtenerPacientePorId(String id) throws Exception {
+    String sql = "SELECT * FROM paciente WHERE id = '" + id + "'";
+    return conn.showDate(sql);
+}
 }
