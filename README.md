@@ -1,18 +1,46 @@
-# SimpleJavaLoginMD
-Login with Java Swing and material design style (only design).
+# Sistema de Gestión de Clínica - Java Swing  
 
-## Features
-✔️ Graphic interface with Material Design style.\
-✔️ Basic visual effects like mouse hover.\
-✔️ Custom header bar and close icon.
+Un sistema de gestión clínica desarrollado en **Java Swing**, con una interfaz moderna basada en **Material Design**. Diseñado para gestionar pacientes, médicos y citas, ofreciendo una experiencia eficiente y fácil de usar.  
 
-## Preview
+---
+
+## 📋 Características Principales  
+
+✔️ **Interfaz Gráfica Modernizada**: Inspirada en los principios de diseño de Material Design.  
+✔️ **Gestión de Citas**: Programa, reprograma, cancela y realiza seguimiento del estado de las citas.  
+✔️ **Gestión de Pacientes y Médicos**: Registro, edición y visualización de datos esenciales.  
+✔️ **Estados Personalizados**: Gestión flexible de estados como:  
+   - *Programada*  
+   - *Confirmada*  
+   - *En Progreso*  
+   - *Completada*  
+   - *Cancelada*  
+   - *Reprogramada*  
+✔️ **Efectos Visuales**: Animaciones sutiles como hover y transiciones para mejorar la experiencia del usuario.  
+✔️ **Barra de Cabecera Personalizada**: Incluye iconos personalizados para cerrar y minimizar ventanas.  
+
+---
+
+## 🌟 Vista Previa  
 
 <p align="center">
   <kbd>
-    <img src="https://i.ibb.co/DgwwkBw/loginnew.png"></img>
+    <img src="./images/readme.jpg" alt="Vista previa del sistema">
   </kbd>
 </p>
 
-## Note
-This is only design. No contains a login system, just capture the username and password and you can use the authentication method that you prefer.
+---
+
+## ⚙️ Requisitos  
+
+- **Java 8 o superior**  
+- IDE compatible (NetBeans, IntelliJ, Eclipse, etc.)  
+- Base de datos configurada (MySQL recomendada)  
+
+---
+
+## 🚀 Cómo Usar  
+
+1. Clona este repositorio en tu máquina local:  
+   ```bash
+   git clone https://github.com/programfive/sistemaClinica.git
